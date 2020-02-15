@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 //@Entity(name="user") You can assign different name for the entity, default is the class name
 //@Table(name="user", schema="ni00") You can also define the table in specific schema for distinguishing tables
@@ -15,6 +17,8 @@ public class User {
 	@Id
 	@GeneratedValue
 	private long id;
+	@NotEmpty(message="Username is mandatory field. Pleasse provide the username value")
+	@Size(min=2, message="Firstname should have at least 2 characters")
 	@Column(name="USER_NAME", length=50, nullable=false, unique=true)
 	private String username;
 	@Column(name="FIRST_NAME", length=50, nullable=false)
