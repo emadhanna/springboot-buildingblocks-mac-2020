@@ -11,15 +11,17 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
+import org.springframework.hateoas.ResourceSupport;
+
 //@Entity(name="user") You can assign different name for the entity, default is the class name
 //@Table(name="user", schema="ni00") You can also define the table in specific schema for distinguishing tables
 @Entity
 @Table(name="user")
-public class User {
+public class User extends ResourceSupport{
 
 	@Id
 	@GeneratedValue
-	private long id;
+	private long userId;
 	@NotEmpty(message="Username is mandatory field. Pleasse provide the username value")
 	@Size(min=2, message="Firstname should have at least 2 characters")
 	@Column(name="USER_NAME", length=50, nullable=false, unique=true)
@@ -50,7 +52,7 @@ public class User {
 	}
 
 	public User(long id, String username, String firstname, String lastname, String email, String role, String ssn) {
-		this.id = id;
+		this.userId = id;
 		this.username = username;
 		this.firstname = firstname;
 		this.lastname = lastname;
@@ -60,9 +62,11 @@ public class User {
 	
 	}
 
-	public long getId() { return id; }
+	
+	
+	public long getUserId() { return userId; }
 
-	public void setId(long id) { this.id = id; }
+	public void setUserId(long id) { this.userId = id; }
 
 	public String getUsername() { return username; }
 
@@ -91,7 +95,7 @@ public class User {
 	@Override
 	public String toString() {
 		
-		return "User [id=" + id + ", username=" + username + ", firstname=" + firstname + ", lastname=" + lastname
+		return "User [id=" + userId + ", username=" + username + ", firstname=" + firstname + ", lastname=" + lastname
 				+ ", email=" + email + ", role=" + role + ", ssn=" + ssn + "]";
 	
 	}	
